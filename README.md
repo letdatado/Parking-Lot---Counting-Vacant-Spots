@@ -27,13 +27,13 @@
 ### 2) Build crops for dataset (1–2 fps is fine)
 `python carve_parking_spots.py --mode crop --video cropped_video.mp4 --rois rois.json --out_dir crops --fps 2`
 
-### 3) Label images quickly (o=occupied, v=vacant, u=unknown)
+### 3a) Label images quickly (o=occupied, v=vacant, u=unknown)
 `python labeler.py`
 
-### (optional) Thumbnail relabeling via drag & drop
+### 3b) Optional - Thumbnail relabeling via drag & drop
 `python make_two_folders_from_csv.py --labels labels.csv --hardlink`
 
-### Move mislabels between review\vacant and review\occupied
+### 3c) Move mislabels between review\vacant and review\occupied
 `python sync_labels_with_folders.py --backup`
 
 ### 4) Build train/val/test split (time-based; single-class stalls go to train only)
@@ -114,16 +114,29 @@ If you want different behavior, change these constants near the top:
 
 .
 ├── app.py                          # Streamlit UI with EMA + hysteresis playback
+
 ├── carve_parking_spots.py          # annotate ROIs & crop/rectify frames
+
 ├── infer_on_video.py               # script overlay (batch warps + smoothing/hysteresis)
+
 ├── labeler.py                      # fast keyboard labeler -> labels.csv
+
 ├── make_two_folders_from_csv.py    # build review/occupied|vacant from CSV
+
 ├── sync_labels_with_folders.py     # adopt moves back to labels.csv (backup/dry-run + flips)
+
 ├── review_diff_preview.py          # preview which files would change in a sync
+
 ├── label_stats.py                  # class balance overall + per spot
+
 ├── make_dataset.py                 # build data/train|val|test (time-split; spot_XX__ names)
+
 ├── train_tinycnn.py                # tiny CNN trainer (pos_weight, Windows-safe)
+
 ├── calibrate_thresholds.py         # per-spot thresholds from validation set
+
 ├── rois.json                       # saved polygons (from annotation)
+
 ├── crops/                          # carved crops per spot (from step 2)
+
 └── data/                           # train|val|test folders (from step 5)

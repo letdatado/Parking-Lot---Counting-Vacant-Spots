@@ -113,6 +113,7 @@ If you want different behavior, change these constants near the top:
 # Project Structure:
 
 .
+
 ├── app.py                          # Streamlit UI with EMA + hysteresis playback
 
 ├── carve_parking_spots.py          # annotate ROIs & crop/rectify frames
@@ -140,3 +141,4 @@ If you want different behavior, change these constants near the top:
 ├── crops/                          # carved crops per spot (from step 2)
 
 └── data/                           # train|val|test folders (from step 5)
+
